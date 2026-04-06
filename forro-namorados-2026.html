@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Forró dos Namorados 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --terracota:  #C4621A;
+  --terracota2: #B5541A;
+  --terracota3: #A04515;
+  --sand:       #D4894A;
+  --cream:      #F5ECD8;
+  --ink:        #1A1008;
+  --red:        #C0201A;
+  --offwhite:   #EDE0C8;
+  --gold:       #F2C14E;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--terracota);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* ── TILE TEXTURE (quadriculado terracota como na imagem) ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.875rem 2rem;
+  background: rgba(160,69,21,0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 2px solid rgba(242,193,78,0.3);
+}
+.nav-links { display: flex; gap: 1.5rem; list-style: none; }
+.nav-links a {
+  font-size: 13px; font-weight: 500;
+  color: var(--cream); text-decoration: none; letter-spacing: .05em;
+  transition: color .15s;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-logo-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px; letter-spacing: .1em; color: var(--gold);
+}
+@media (max-width: 600px) {
+  .nav-links { display: none; }
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100svh;
+  position: relative;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 100px 1.5rem 3rem;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* bandeirinhas SVG topo */
+.bandeirinhas {
+  position: absolute; top: 60px; left: 0; right: 0;
+  width: 100%; height: 80px;
+  z-index: 2; pointer-events: none;
+}
+
+/* estrelas/faíscas decorativas */
+.spark {
+  position: absolute;
+  z-index: 1; pointer-events: none;
+  opacity: 0.7;
+}
+.spark svg { display: block; }
+
+/* cactos laterais */
+.cactus-left, .cactus-right {
+  position: absolute; bottom: 0; z-index: 3;
+  pointer-events: none;
+}
+.cactus-left { left: 0; }
+.cactus-right { right: 0; transform: scaleX(-1); }
+
+/* balão */
+.balao {
+  position: absolute; top: 90px; right: 8%;
+  z-index: 2; pointer-events: none;
+  animation: balaoFloat 4s ease-in-out infinite;
+}
+@keyframes balaoFloat {
+  0%,100% { transform: translateY(0) rotate(5deg); }
+  50%      { transform: translateY(-12px) rotate(2deg); }
+}
+
+/* chapéu */
+.chapeu {
+  position: absolute; top: 90px; left: 6%;
+  z-index: 2; pointer-events: none;
+  animation: chapeuSway 5s ease-in-out infinite;
+}
+@keyframes chapeuSway {
+  0%,100% { transform: rotate(-8deg); }
+  50%      { transform: rotate(-3deg); }
+}
+
+/* emblema central (marquee de luzes) */
+.emblema-wrapper {
+  position: relative; z-index: 5;
+  margin-bottom: 1.5rem;
+  animation: fadeUp .7s ease both;
+}
+.emblema {
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  background: #8B3A10;
+  border: 6px solid var(--offwhite);
+  box-shadow:
+    0 0 0 3px var(--terracota3),
+    0 0 0 6px var(--offwhite),
+    0 0 24px rgba(0,0,0,0.4);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  margin: 0 auto;
+}
+.emblema::before {
+  content: '';
+  position: absolute; inset: -3px;
+  border-radius: 50%;
+  background: repeating-conic-gradient(
+    from 0deg,
+    #F2C14E 0deg 8deg,
+    transparent 8deg 18deg
+  );
+  z-index: 0; opacity: .9;
+}
+.emblema-inner {
+  position: relative; z-index: 1;
+  background: #7A3210;
+  width: 136px; height: 136px;
+  border-radius: 50%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 10px;
+}
+.emblema-forró {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px; letter-spacing: .05em;
+  color: #fff; line-height: 1;
+}
+.emblema-dos {
+  font-size: 11px; letter-spacing: .15em;
+  color: var(--gold); text-transform: uppercase; line-height: 1.2;
+}
+.emblema-namorados {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px; letter-spacing: .08em;
+  color: var(--cream); line-height: 1;
+}
+
+/* título principal */
+.hero-title-block {
+  position: relative; z-index: 5;
+  margin-bottom: 1rem;
+  animation: fadeUp .8s .1s ease both;
+}
+.titulo-bold {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(52px, 15vw, 120px);
+  letter-spacing: .03em;
+  color: var(--ink);
+  line-height: .95;
+  text-shadow: 3px 3px 0 rgba(255,255,255,.1);
+  display: block;
+}
+.titulo-script {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(28px, 8vw, 64px);
+  color: var(--ink);
+  font-weight: 700;
+  display: block;
+  margin-top: -8px;
+}
+.titulo-arrow {
+  display: inline-block;
+  font-size: clamp(18px, 4vw, 32px);
+  color: var(--ink);
+  margin-left: 8px;
+  font-family: 'Caveat', cursive;
+}
+
+/* meta info */
+.hero-meta {
+  display: flex; gap: 2rem; flex-wrap: wrap;
+  justify-content: center;
+  position: relative; z-index: 5;
+  margin-bottom: 2rem;
+  animation: fadeUp .9s .2s ease both;
+}
+.meta-chip {
+  background: rgba(26,16,8,0.25);
+  border: 1.5px solid rgba(242,193,78,0.4);
+  border-radius: 4px;
+  padding: 6px 16px;
+}
+.meta-chip .lbl { font-size: 10px; letter-spacing: .18em; color: var(--gold); text-transform: uppercase; display: block; }
+.meta-chip .val { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: var(--cream); letter-spacing: .05em; }
+
+.hero-ctas {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  justify-content: center;
+  position: relative; z-index: 5;
+  animation: fadeUp 1s .3s ease both;
+}
+
+/* casal dançando (bottom) */
+.casal-wrapper {
+  position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+  z-index: 4; pointer-events: none;
+  width: min(340px, 70vw);
+}
+
+/* corações laterais */
+.coracoes {
+  position: absolute; bottom: 140px;
+  z-index: 3; pointer-events: none;
+}
+.coracao { font-size: 28px; color: var(--red); opacity: .85; }
+
+/* ── COUNTDOWN ── */
+.countdown-bar {
+  position: relative; z-index: 10;
+  background: var(--ink);
+  padding: 1.25rem 1.5rem;
+  display: flex; align-items: center; justify-content: center;
+  gap: 2.5rem; flex-wrap: wrap;
+  border-top: 3px solid var(--gold);
+  border-bottom: 3px solid var(--gold);
+}
+.cd-lbl-main {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px; letter-spacing: .2em;
+  color: var(--gold);
+}
+.cd-units { display: flex; gap: 1rem; align-items: center; }
+.cd-unit { text-align: center; }
+.cd-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 44px; color: var(--terracota);
+  line-height: 1; display: block;
+}
+.cd-sub { font-size: 10px; letter-spacing: .18em; color: rgba(242,193,78,.6); text-transform: uppercase; }
+.cd-dot { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--gold); opacity: .5; }
+
+/* ── BUTTONS ── */
+.btn-main {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px; letter-spacing: .1em;
+  background: var(--ink);
+  color: var(--gold);
+  border: 3px solid var(--ink);
+  border-radius: 4px;
+  padding: 12px 32px;
+  cursor: pointer; text-decoration: none;
+  display: inline-block;
+  transition: background .15s, color .15s, transform .15s;
+}
+.btn-main:hover { background: var(--gold); color: var(--ink); transform: translateY(-2px); }
+
+.btn-outline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px; letter-spacing: .1em;
+  background: transparent;
+  color: var(--ink);
+  border: 3px solid var(--ink);
+  border-radius: 4px;
+  padding: 12px 32px;
+  cursor: pointer; text-decoration: none;
+  display: inline-block;
+  transition: background .15s, color .15s, transform .15s;
+}
+.btn-outline:hover { background: var(--ink); color: var(--cream); transform: translateY(-2px); }
+
+/* ── PRODUCTS SECTION ── */
+.products-section {
+  position: relative; z-index: 10;
+  background: var(--terracota2);
+  padding: 5rem 1.5rem;
+}
+.products-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+.section-inner { max-width: 1100px; margin: 0 auto; position: relative; }
+
+.section-tag {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px; letter-spacing: .3em;
+  color: var(--gold); margin-bottom: .5rem;
+}
+.section-heading-bold {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(36px, 7vw, 72px);
+  color: var(--ink); letter-spacing: .03em;
+  line-height: .95; display: block;
+}
+.section-heading-script {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(22px, 4vw, 42px);
+  color: var(--ink); font-weight: 700;
+  display: block; margin-top: 4px;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
+  margin-top: 2.5rem;
+}
+
+.pcard {
+  background: var(--offwhite);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 3px solid var(--ink);
+  transition: transform .2s, box-shadow .2s;
+  position: relative;
+}
+.pcard:hover { transform: translateY(-6px); box-shadow: 6px 6px 0 var(--ink); }
+
+.pcard-band { height: 8px; }
+.band-rifa    { background: repeating-linear-gradient(90deg, var(--red) 0 18px, var(--ink) 18px 36px); }
+.band-mesa    { background: repeating-linear-gradient(90deg, var(--gold) 0 18px, var(--ink) 18px 36px); }
+.band-ingresso{ background: repeating-linear-gradient(90deg, var(--terracota) 0 18px, var(--ink) 18px 36px); }
+.band-pacote  { background: repeating-linear-gradient(90deg, var(--red) 0 12px, var(--gold) 12px 24px, var(--ink) 24px 36px); }
+
+.pcard-body { padding: 1.5rem; }
+.pcard-icon { font-size: 32px; margin-bottom: 10px; }
+.pcard-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px; letter-spacing: .05em;
+  color: var(--ink); margin-bottom: 6px;
+}
+.pcard-desc { font-size: 13px; color: #5A3018; line-height: 1.55; margin-bottom: 1.25rem; }
+.pcard-price {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 48px; color: var(--red); line-height: 1;
+}
+.pcard-price sup { font-size: 20px; }
+.pcard-price-note { font-size: 12px; color: #7A4530; margin: 4px 0 1.25rem; }
+
+.pcard-badge {
+  position: absolute; top: 16px; right: -4px;
+  background: var(--red);
+  color: #fff;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 12px; letter-spacing: .15em;
+  padding: 4px 14px 4px 10px;
+  border-radius: 3px 0 0 3px;
+  box-shadow: 2px 2px 0 rgba(0,0,0,.2);
+}
+
+.pcard-cta {
+  display: block; width: 100%;
+  background: var(--ink); color: var(--gold);
+  border: 3px solid var(--ink);
+  border-radius: 4px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px; letter-spacing: .1em;
+  padding: 10px; cursor: pointer;
+  transition: background .15s, color .15s;
+  text-align: center;
+}
+.pcard-cta:hover { background: var(--gold); color: var(--ink); }
+
+/* ── PAGAMENTO ── */
+.pay-section {
+  position: relative; z-index: 10;
+  background: var(--ink);
+  padding: 4rem 1.5rem;
+  border-top: 3px solid var(--gold);
+  border-bottom: 3px solid var(--gold);
+  text-align: center;
+}
+.pay-section .section-heading-bold { color: var(--cream); }
+.pay-section .section-heading-script { color: var(--gold); }
+.pay-badges {
+  display: flex; gap: 20px;
+  justify-content: center; flex-wrap: wrap;
+  margin-top: 2rem;
+}
+.pay-badge {
+  background: rgba(245,236,216,.07);
+  border: 2px solid rgba(242,193,78,.25);
+  border-radius: 8px;
+  padding: 1.5rem 2.5rem;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 10px;
+  min-width: 160px;
+  transition: border-color .15s;
+}
+.pay-badge:hover { border-color: var(--gold); }
+.pay-badge-icon {
+  width: 52px; height: 52px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+}
+.pay-badge-icon.pix { background: rgba(29,158,117,.18); }
+.pay-badge-icon.cc  { background: rgba(192,32,26,.18); }
+.pay-badge-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px; letter-spacing: .08em; color: var(--cream);
+}
+.pay-badge-note { font-size: 12px; color: rgba(245,236,216,.5); }
+
+/* ── INFO ── */
+.info-section {
+  position: relative; z-index: 10;
+  background: var(--terracota3);
+  padding: 5rem 1.5rem;
+}
+.info-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,0,0,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 3px; margin-top: 2.5rem;
+  border: 3px solid var(--ink);
+  border-radius: 8px; overflow: hidden;
+}
+.info-item {
+  background: var(--offwhite);
+  padding: 2rem 1.5rem; text-align: center;
+  border-right: 3px solid var(--ink);
+}
+.info-item:last-child { border-right: none; }
+.info-item-icon { font-size: 32px; display: block; margin-bottom: 10px; }
+.info-item-lbl {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 12px; letter-spacing: .22em; color: var(--terracota); margin-bottom: 6px;
+}
+.info-item-val {
+  font-family: 'Caveat', cursive;
+  font-size: 22px; font-weight: 700; color: var(--ink); line-height: 1.2;
+}
+
+/* CTA strip */
+.cta-strip {
+  background: var(--gold);
+  padding: 3rem 1.5rem;
+  text-align: center;
+  position: relative; z-index: 10;
+  border-top: 3px solid var(--ink);
+  border-bottom: 3px solid var(--ink);
+}
+.cta-strip-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(32px, 6vw, 60px);
+  color: var(--ink); letter-spacing: .04em; margin-bottom: 8px;
+}
+.cta-strip-sub {
+  font-size: 15px; color: #5A3A08; margin-bottom: 1.5rem; line-height: 1.6;
+}
+
+/* ── FAQ ── */
+.faq-section {
+  position: relative; z-index: 10;
+  background: var(--terracota2);
+  padding: 5rem 1.5rem;
+}
+.faq-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+.faq-list { margin-top: 2rem; display: flex; flex-direction: column; gap: 4px; }
+.faq-item {
+  border: 3px solid var(--ink);
+  border-radius: 6px; overflow: hidden;
+  background: var(--offwhite);
+}
+.faq-q {
+  width: 100%; background: transparent; border: none;
+  color: var(--ink); font-family: 'DM Sans', sans-serif;
+  font-size: 15px; font-weight: 500;
+  padding: 1.1rem 1.25rem;
+  text-align: left; cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  transition: background .15s;
+}
+.faq-q:hover { background: rgba(196,98,26,.08); }
+.faq-arrow {
+  flex-shrink: 0;
+  width: 24px; height: 24px;
+  background: var(--ink); color: var(--gold);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Bebas Neue', sans-serif; font-size: 16px;
+  transition: transform .2s, background .2s;
+}
+.faq-item.open .faq-arrow { transform: rotate(45deg); background: var(--red); }
+.faq-a {
+  display: none;
+  padding: 0 1.25rem 1.1rem;
+  font-size: 14px; color: #5A3018; line-height: 1.7;
+  border-top: 2px solid rgba(26,16,8,.1);
+  padding-top: 1rem;
+}
+.faq-item.open .faq-a { display: block; }
+
+/* ── FOOTER ── */
+footer {
+  position: relative; z-index: 10;
+  background: var(--ink);
+  padding: 3rem 1.5rem 2rem;
+  text-align: center;
+  border-top: 3px solid var(--gold);
+}
+.footer-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px; letter-spacing: .15em; color: var(--gold);
+  margin-bottom: 4px;
+}
+.footer-script {
+  font-family: 'Caveat', cursive;
+  font-size: 20px; font-weight: 700; color: var(--cream);
+  margin-bottom: 1rem;
+}
+footer p { font-size: 13px; color: rgba(245,236,216,.45); }
+footer a { color: var(--gold); text-decoration: none; }
+
+/* ── MODAL ── */
+.modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(26,16,8,.85); z-index: 300;
+  align-items: center; justify-content: center; padding: 1rem;
+}
+.modal-overlay.active { display: flex; }
+.modal-box {
+  background: var(--offwhite);
+  border: 3px solid var(--ink);
+  border-radius: 8px;
+  width: 100%; max-width: 440px;
+  padding: 2rem; position: relative;
+  animation: fadeUp .25s ease;
+  box-shadow: 6px 6px 0 var(--ink);
+}
+.modal-close {
+  position: absolute; top: 12px; right: 14px;
+  background: var(--ink); color: var(--gold);
+  border: none; border-radius: 50%;
+  width: 28px; height: 28px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px; cursor: pointer; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+}
+.modal-tag {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 12px; letter-spacing: .25em; color: var(--terracota);
+  margin-bottom: 4px;
+}
+.modal-product-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 30px; color: var(--ink); margin-bottom: 2px;
+}
+.modal-price {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 40px; color: var(--red); margin-bottom: 1.5rem;
+}
+.modal-input {
+  width: 100%;
+  background: #fff;
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  padding: 10px 14px;
+  font-size: 14px;
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  outline: none;
+  transition: border-color .15s;
+  margin-bottom: 10px;
+}
+.modal-input:focus { border-color: var(--terracota); }
+.pay-row { display: flex; gap: 10px; margin-bottom: 1.5rem; }
+.pay-opt {
+  flex: 1; padding: 10px;
+  border: 2px solid var(--ink); border-radius: 4px;
+  background: transparent; font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px; letter-spacing: .06em;
+  color: var(--ink); cursor: pointer;
+  transition: background .15s, color .15s;
+}
+.pay-opt.selected { background: var(--ink); color: var(--gold); }
+.modal-submit {
+  display: block; width: 100%;
+  background: var(--ink); color: var(--gold);
+  border: 3px solid var(--ink);
+  border-radius: 4px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px; letter-spacing: .1em;
+  padding: 12px; cursor: pointer;
+  transition: background .15s, color .15s;
+  text-align: center;
+}
+.modal-submit:hover { background: var(--gold); color: var(--ink); }
+.modal-secure { font-size: 11px; color: #7A4530; text-align: center; margin-top: 8px; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo-text">FORRÓ DOS NAMORADOS</span>
+  <ul class="nav-links">
+    <li><a href="#ingressos">Ingressos</a></li>
+    <li><a href="#info">Informações</a></li>
+    <li><a href="#faq">Dúvidas</a></li>
+    <li><a href="#ingressos" style="color:var(--gold);font-weight:700">COMPRAR →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+
+  <!-- bandeirinhas SVG -->
+  <svg class="bandeirinhas" viewBox="0 0 1000 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <line x1="0" y1="20" x2="1000" y2="20" stroke="#1A1008" stroke-width="2"/>
+    <!-- bandeirinhas preto/branco/listrado como na imagem -->
+    <g>
+      <polygon points="60,20 80,20 70,55" fill="#1A1008"/>
+      <polygon points="90,20 110,20 100,55" fill="#F5ECD8"/>
+      <polygon points="120,20 140,20 130,55" fill="#1A1008" stroke="#F5ECD8" stroke-width="1"/>
+      <polygon points="150,20 170,20 160,55" fill="#F5ECD8"/>
+      <polygon points="180,20 200,20 190,55" fill="#1A1008"/>
+      <polygon points="210,20 230,20 220,55" fill="#F5ECD8"/>
+      <polygon points="240,20 260,20 250,55" fill="#1A1008"/>
+      <polygon points="270,20 290,20 280,55" fill="#F5ECD8"/>
+      <polygon points="300,20 320,20 310,55" fill="#1A1008"/>
+      <polygon points="330,20 350,20 340,55" fill="#F5ECD8"/>
+      <polygon points="360,20 380,20 370,55" fill="#1A1008"/>
+      <polygon points="390,20 410,20 400,55" fill="#F5ECD8"/>
+      <polygon points="420,20 440,20 430,55" fill="#1A1008"/>
+      <polygon points="450,20 470,20 460,55" fill="#F5ECD8"/>
+      <polygon points="480,20 500,20 490,55" fill="#1A1008"/>
+      <polygon points="510,20 530,20 520,55" fill="#F5ECD8"/>
+      <polygon points="540,20 560,20 550,55" fill="#1A1008"/>
+      <polygon points="570,20 590,20 580,55" fill="#F5ECD8"/>
+      <polygon points="600,20 620,20 610,55" fill="#1A1008"/>
+      <polygon points="630,20 650,20 640,55" fill="#F5ECD8"/>
+      <polygon points="660,20 680,20 670,55" fill="#1A1008"/>
+      <polygon points="690,20 710,20 700,55" fill="#F5ECD8"/>
+      <polygon points="720,20 740,20 730,55" fill="#1A1008"/>
+      <polygon points="750,20 770,20 760,55" fill="#F5ECD8"/>
+      <polygon points="780,20 800,20 790,55" fill="#1A1008"/>
+      <polygon points="810,20 830,20 820,55" fill="#F5ECD8"/>
+      <polygon points="840,20 860,20 850,55" fill="#1A1008"/>
+      <polygon points="870,20 890,20 880,55" fill="#F5ECD8"/>
+      <polygon points="900,20 920,20 910,55" fill="#1A1008"/>
+    </g>
+  </svg>
+
+  <!-- faísca esquerda -->
+  <div class="spark" style="top:130px;left:4%;width:60px">
+    <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="30" y1="5" x2="30" y2="55" stroke="#1A1008" stroke-width="2.5"/>
+      <line x1="5" y1="30" x2="55" y2="30" stroke="#1A1008" stroke-width="2.5"/>
+      <line x1="13" y1="13" x2="47" y2="47" stroke="#1A1008" stroke-width="2"/>
+      <line x1="47" y1="13" x2="13" y2="47" stroke="#1A1008" stroke-width="2"/>
+    </svg>
+  </div>
+
+  <!-- faísca direita topo -->
+  <div class="spark" style="top:100px;right:3%;width:50px">
+    <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="30" y1="5" x2="30" y2="55" stroke="#1A1008" stroke-width="2.5"/>
+      <line x1="5" y1="30" x2="55" y2="30" stroke="#1A1008" stroke-width="2.5"/>
+      <line x1="13" y1="13" x2="47" y2="47" stroke="#1A1008" stroke-width="2"/>
+      <line x1="47" y1="13" x2="13" y2="47" stroke="#1A1008" stroke-width="2"/>
+    </svg>
+  </div>
+
+  <!-- faísca canto inferior esquerdo -->
+  <div class="spark" style="bottom:220px;left:10%;width:40px">
+    <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="30" y1="8" x2="30" y2="52" stroke="#1A1008" stroke-width="2"/>
+      <line x1="8" y1="30" x2="52" y2="30" stroke="#1A1008" stroke-width="2"/>
+      <line x1="16" y1="16" x2="44" y2="44" stroke="#1A1008" stroke-width="1.5"/>
+      <line x1="44" y1="16" x2="16" y2="44" stroke="#1A1008" stroke-width="1.5"/>
+    </svg>
+  </div>
+
+  <!-- balão de são joão -->
+  <div class="balao">
+    <svg width="60" height="100" viewBox="0 0 60 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- corpo do balão -->
+      <path d="M30 8 C10 8 4 30 4 44 C4 60 16 72 30 72 C44 72 56 60 56 44 C56 30 50 8 30 8Z" fill="#F5ECD8" stroke="#1A1008" stroke-width="2"/>
+      <!-- listras -->
+      <path d="M30 8 C20 20 16 40 18 72" stroke="#1A1008" stroke-width="1.5"/>
+      <path d="M30 8 C40 20 44 40 42 72" stroke="#1A1008" stroke-width="1.5"/>
+      <path d="M30 8 C10 18 4 38 8 60" stroke="#1A1008" stroke-width="1"/>
+      <path d="M30 8 C50 18 56 38 52 60" stroke="#1A1008" stroke-width="1"/>
+      <!-- base -->
+      <path d="M18 72 Q30 78 42 72" fill="#1A1008"/>
+      <!-- fio -->
+      <line x1="30" y1="78" x2="30" y2="100" stroke="#1A1008" stroke-width="1.5"/>
+    </svg>
+  </div>
+
+  <!-- chapéu caipira -->
+  <div class="chapeu">
+    <svg width="80" height="60" viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="40" cy="48" rx="38" ry="10" fill="#1A1008"/>
+      <path d="M16 48 C16 48 20 18 40 12 C60 18 64 48 64 48Z" fill="#1A1008"/>
+      <path d="M16 36 Q40 28 64 36" stroke="#C0201A" stroke-width="3"/>
+      <circle cx="40" cy="12" r="4" fill="#C4621A" stroke="#1A1008" stroke-width="1.5"/>
+    </svg>
+  </div>
+
+  <!-- Emblema central -->
+  <div class="emblema-wrapper">
+    <div class="emblema">
+      <div class="emblema-inner">
+        <span class="emblema-forró">FORRÓ</span>
+        <span class="emblema-dos">dos</span>
+        <span class="emblema-namorados">NAMORADOS</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Título -->
+  <div class="hero-title-block">
+    <span class="titulo-bold">INGRESSOS</span>
+    <span class="titulo-script">& rifas 2026 <span class="titulo-arrow">↗</span></span>
+  </div>
+
+  <!-- Meta chips -->
+  <div class="hero-meta">
+    <div class="meta-chip">
+      <span class="lbl">Data</span>
+      <span class="val">12 DE JUNHO</span>
+    </div>
+    <div class="meta-chip">
+      <span class="lbl">Horário</span>
+      <span class="val">20H ÀS 03H</span>
+    </div>
+    <div class="meta-chip">
+      <span class="lbl">Local</span>
+      <span class="val">RECIFE — PE</span>
+    </div>
+  </div>
+
+  <!-- CTAs -->
+  <div class="hero-ctas">
+    <a class="btn-main" href="#ingressos">GARANTIR INGRESSO</a>
+    <a class="btn-outline" href="#info">VER DETALHES</a>
+  </div>
+
+  <!-- Cactos -->
+  <div class="cactus-left">
+    <svg width="120" height="260" viewBox="0 0 120 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- cacto principal -->
+      <rect x="48" y="60" width="24" height="200" rx="12" fill="#1A1008"/>
+      <!-- braço esquerdo -->
+      <rect x="18" y="100" width="30" height="16" rx="8" fill="#1A1008"/>
+      <rect x="12" y="70" width="16" height="50" rx="8" fill="#1A1008"/>
+      <!-- braço direito -->
+      <rect x="72" y="130" width="30" height="16" rx="8" fill="#1A1008"/>
+      <rect x="86" y="100" width="16" height="50" rx="8" fill="#1A1008"/>
+      <!-- flores vermelhas -->
+      <circle cx="60" cy="60" r="8" fill="#C0201A"/>
+      <circle cx="14" cy="70" r="6" fill="#C0201A"/>
+      <circle cx="98" cy="100" r="6" fill="#C0201A"/>
+      <!-- arbustos base -->
+      <path d="M10 258 Q30 235 50 258" fill="#1A1008"/>
+      <path d="M55 258 Q75 240 90 258" fill="#1A1008"/>
+    </svg>
+  </div>
+
+  <div class="cactus-right">
+    <svg width="120" height="260" viewBox="0 0 120 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="48" y="60" width="24" height="200" rx="12" fill="#1A1008"/>
+      <rect x="18" y="100" width="30" height="16" rx="8" fill="#1A1008"/>
+      <rect x="12" y="70" width="16" height="50" rx="8" fill="#1A1008"/>
+      <rect x="72" y="130" width="30" height="16" rx="8" fill="#1A1008"/>
+      <rect x="86" y="100" width="16" height="50" rx="8" fill="#1A1008"/>
+      <circle cx="60" cy="60" r="8" fill="#C0201A"/>
+      <circle cx="14" cy="70" r="6" fill="#C0201A"/>
+      <circle cx="98" cy="100" r="6" fill="#C0201A"/>
+      <path d="M10 258 Q30 235 50 258" fill="#1A1008"/>
+      <path d="M55 258 Q75 240 90 258" fill="#1A1008"/>
+    </svg>
+  </div>
+
+  <!-- corações -->
+  <div class="coracoes" style="right:18%">
+    <div class="coracao">♥</div>
+  </div>
+  <div class="coracoes" style="left:18%">
+    <div class="coracao" style="font-size:20px;opacity:.6">♥</div>
+  </div>
+
+  <!-- Casal dançando SVG -->
+  <div class="casal-wrapper">
+    <svg viewBox="0 0 340 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- chão / palco -->
+      <ellipse cx="170" cy="210" rx="130" ry="12" fill="rgba(26,16,8,0.2)"/>
+      <path d="M40 210 Q170 195 300 210" fill="#D4894A" stroke="#1A1008" stroke-width="1.5"/>
+
+      <!-- Homem (esquerda) -->
+      <g transform="translate(90,40)">
+        <!-- chapéu -->
+        <ellipse cx="28" cy="12" rx="22" ry="6" fill="#1A1008"/>
+        <path d="M14 12 C14 12 18 -2 28 -4 C38 -2 42 12 42 12Z" fill="#1A1008"/>
+        <rect x="24" y="-4" width="8" height="4" rx="2" fill="#C0201A"/>
+        <!-- cabeça -->
+        <circle cx="28" cy="24" r="14" fill="#F5ECD8" stroke="#1A1008" stroke-width="1.5"/>
+        <!-- olhos fechados -->
+        <path d="M22 23 Q25 21 28 23" stroke="#1A1008" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M28 23 Q31 21 34 23" stroke="#1A1008" stroke-width="1.5" stroke-linecap="round"/>
+        <!-- camisa listrada -->
+        <path d="M14 38 Q28 34 42 38 L46 80 L10 80Z" fill="#F5ECD8" stroke="#1A1008" stroke-width="1.5"/>
+        <line x1="20" y1="38" x2="18" y2="80" stroke="#1A1008" stroke-width="1"/>
+        <line x1="28" y1="36" x2="28" y2="80" stroke="#1A1008" stroke-width="1"/>
+        <line x1="36" y1="38" x2="38" y2="80" stroke="#1A1008" stroke-width="1"/>
+        <!-- suspensório -->
+        <path d="M22 38 L20 80" stroke="#1A1008" stroke-width="2"/>
+        <path d="M34 38 L36 80" stroke="#1A1008" stroke-width="2"/>
+        <!-- calça listrada -->
+        <path d="M10 80 L6 150 L24 150 L28 110 L32 150 L50 150 L46 80Z" fill="#F5ECD8" stroke="#1A1008" stroke-width="1.5"/>
+        <line x1="10" y1="80" x2="8" y2="150" stroke="#1A1008" stroke-width="0.8"/>
+        <line x1="18" y1="80" x2="16" y2="150" stroke="#1A1008" stroke-width="0.8"/>
+        <line x1="38" y1="80" x2="40" y2="150" stroke="#1A1008" stroke-width="0.8"/>
+        <line x1="46" y1="80" x2="48" y2="150" stroke="#1A1008" stroke-width="0.8"/>
+        <!-- botas -->
+        <path d="M6 148 Q2 155 8 160 L26 160 L24 148Z" fill="#1A1008"/>
+        <path d="M50 148 Q54 155 48 160 L30 160 L32 148Z" fill="#1A1008"/>
+        <!-- estrelas no chapéu -->
+        <circle cx="20" cy="4" r="2" fill="#F2C14E"/>
+        <circle cx="36" cy="4" r="2" fill="#F2C14E"/>
+        <!-- braço esticado direita (de mãos dadas) -->
+        <path d="M42 50 Q70 45 80 55" stroke="#1A1008" stroke-width="6" stroke-linecap="round" fill="none"/>
+        <path d="M42 50 Q70 45 80 55" stroke="#F5ECD8" stroke-width="3" stroke-linecap="round" fill="none"/>
+      </g>
+
+      <!-- Mulher (direita) -->
+      <g transform="translate(178,35)">
+        <!-- chapéu pequeno / flor no cabelo -->
+        <circle cx="28" cy="8" r="6" fill="#1A1008"/>
+        <circle cx="28" cy="8" r="3" fill="#C0201A"/>
+        <!-- cabelo -->
+        <path d="M10 22 Q4 40 8 55" stroke="#1A1008" stroke-width="5" stroke-linecap="round" fill="none"/>
+        <path d="M46 22 Q52 38 48 50" stroke="#1A1008" stroke-width="5" stroke-linecap="round" fill="none"/>
+        <!-- cabeça -->
+        <circle cx="28" cy="24" r="14" fill="#F5ECD8" stroke="#1A1008" stroke-width="1.5"/>
+        <!-- olhos fechados -->
+        <path d="M22 23 Q25 21 28 23" stroke="#1A1008" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M28 23 Q31 21 34 23" stroke="#1A1008" stroke-width="1.5" stroke-linecap="round"/>
+        <!-- corpo blusa -->
+        <path d="M14 38 Q28 34 42 38 L38 68 L18 68Z" fill="#F5ECD8" stroke="#1A1008" stroke-width="1.5"/>
+        <!-- saia rodada listrada -->
+        <path d="M12 68 Q2 100 10 150 Q28 160 46 150 Q54 100 44 68Z" fill="#F5ECD8" stroke="#1A1008" stroke-width="1.5"/>
+        <line x1="12" y1="68" x2="10" y2="150" stroke="#1A1008" stroke-width="0.8"/>
+        <line x1="20" y1="66" x2="16" y2="152" stroke="#1A1008" stroke-width="0.8"/>
+        <line x1="28" y1="65" x2="28" y2="155" stroke="#1A1008" stroke-width="0.8"/>
+        <line x1="36" y1="66" x2="40" y2="152" stroke="#1A1008" stroke-width="0.8"/>
+        <line x1="44" y1="68" x2="46" y2="150" stroke="#1A1008" stroke-width="0.8"/>
+        <!-- bolinhas na saia -->
+        <circle cx="18" cy="90" r="3" fill="#1A1008"/>
+        <circle cx="30" cy="110" r="3" fill="#1A1008"/>
+        <circle cx="40" cy="95" r="3" fill="#1A1008"/>
+        <!-- botas -->
+        <path d="M10 148 Q6 155 12 160 L24 160 L22 148Z" fill="#1A1008"/>
+        <path d="M46 148 Q50 155 44 160 L32 160 L34 148Z" fill="#1A1008"/>
+        <!-- braço esquerdo (de mãos dadas) -->
+        <path d="M14 50 Q-14 45 -24 55" stroke="#1A1008" stroke-width="6" stroke-linecap="round" fill="none"/>
+        <path d="M14 50 Q-14 45 -24 55" stroke="#F5ECD8" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <!-- braço direito levantado -->
+        <path d="M42 48 Q58 32 66 22" stroke="#1A1008" stroke-width="5" stroke-linecap="round" fill="none"/>
+        <path d="M42 48 Q58 32 66 22" stroke="#F5ECD8" stroke-width="3" stroke-linecap="round" fill="none"/>
+      </g>
+
+      <!-- coração entre os dois -->
+      <text x="162" y="120" font-size="18" fill="#1A1008" text-anchor="middle" opacity="0.7">♥</text>
+    </svg>
+  </div>
+
+</div><!-- /hero -->
+
+<!-- COUNTDOWN -->
+<div class="countdown-bar">
+  <span class="cd-lbl-main">FALTAM</span>
+  <div class="cd-units">
+    <div class="cd-unit">
+      <span class="cd-num" id="cd-d">68</span>
+      <span class="cd-sub">dias</span>
+    </div>
+    <span class="cd-dot">:</span>
+    <div class="cd-unit">
+      <span class="cd-num" id="cd-h">14</span>
+      <span class="cd-sub">horas</span>
+    </div>
+    <span class="cd-dot">:</span>
+    <div class="cd-unit">
+      <span class="cd-num" id="cd-m">32</span>
+      <span class="cd-sub">min</span>
+    </div>
+    <span class="cd-dot">:</span>
+    <div class="cd-unit">
+      <span class="cd-num" id="cd-s">09</span>
+      <span class="cd-sub">seg</span>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<div class="products-section" id="ingressos">
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="section-tag">● INGRESSOS & RIFAS</p>
+      <span class="section-heading-bold">GARANTA SEU LUGAR</span>
+      <span class="section-heading-script">antes que acabe</span>
+    </div>
+
+    <div class="products-grid reveal" style="transition-delay:.1s">
+
+      <div class="pcard">
+        <div class="pcard-band band-ingresso"></div>
+        <div class="pcard-body">
+          <div class="pcard-icon">🎟️</div>
+          <div class="pcard-name">INGRESSO AVULSO</div>
+          <div class="pcard-desc">Entrada + acesso à pista de dança e shows. Área geral.</div>
+          <div class="pcard-price"><sup>R$</sup>60</div>
+          <div class="pcard-price-note">Lote 2 — 30 disponíveis</div>
+          <button class="pcard-cta" onclick="abrirModal('Ingresso Avulso','R$ 60,00')">COMPRAR INGRESSO</button>
+        </div>
+      </div>
+
+      <div class="pcard">
+        <div class="pcard-band band-rifa"></div>
+        <div class="pcard-badge">MAIS VENDIDO</div>
+        <div class="pcard-body">
+          <div class="pcard-icon">🎰</div>
+          <div class="pcard-name">RIFA NUMERADA</div>
+          <div class="pcard-desc">Concorra a R$ 1.000 em dinheiro, sorteado ao vivo na festa.</div>
+          <div class="pcard-price"><sup>R$</sup>10</div>
+          <div class="pcard-price-note">Por número sorteável</div>
+          <button class="pcard-cta" onclick="abrirModal('Rifa Numerada','R$ 10,00 / nº')">COMPRAR RIFA</button>
+        </div>
+      </div>
+
+      <div class="pcard">
+        <div class="pcard-band band-mesa"></div>
+        <div class="pcard-body">
+          <div class="pcard-icon">🪑</div>
+          <div class="pcard-name">MESA VIP</div>
+          <div class="pcard-desc">Mesa reservada para 6 pessoas + 1 rifa bônus por assento.</div>
+          <div class="pcard-price"><sup>R$</sup>480</div>
+          <div class="pcard-price-note">Por mesa (6 lugares) — 7 disponíveis</div>
+          <button class="pcard-cta" onclick="abrirModal('Mesa VIP','R$ 480,00')">RESERVAR MESA</button>
+        </div>
+      </div>
+
+      <div class="pcard">
+        <div class="pcard-band band-pacote"></div>
+        <div class="pcard-body">
+          <div class="pcard-icon">✨</div>
+          <div class="pcard-name">PACOTE COMPLETO</div>
+          <div class="pcard-desc">1 ingresso + 3 rifas com desconto. Melhor custo-benefício.</div>
+          <div class="pcard-price"><sup>R$</sup>85</div>
+          <div class="pcard-price-note">
+            <span style="text-decoration:line-through;opacity:.5">R$ 90</span>
+            &nbsp;<span style="background:#1A1008;color:#F2C14E;padding:1px 7px;border-radius:2px;font-size:11px">−R$5</span>
+          </div>
+          <button class="pcard-cta" onclick="abrirModal('Pacote Completo','R$ 85,00')">COMPRAR PACOTE</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PAGAMENTO -->
+<div class="pay-section">
+  <div class="section-inner reveal">
+    <p class="section-tag" style="color:var(--gold)">● FORMAS DE PAGAMENTO</p>
+    <span class="section-heading-bold" style="color:var(--cream)">PAGUE COMO</span>
+    <span class="section-heading-script" style="color:var(--gold)">preferir</span>
+    <div class="pay-badges">
+      <div class="pay-badge">
+        <div class="pay-badge-icon pix">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" stroke="#1d9e75" stroke-width="1.5"/>
+            <path d="M7 7l10 10M17 7L7 17" stroke="#1d9e75" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="pay-badge-name">PIX</span>
+        <span class="pay-badge-note">Aprovação instantânea</span>
+      </div>
+      <div class="pay-badge">
+        <div class="pay-badge-icon cc">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <rect x="2" y="5" width="20" height="14" rx="2" stroke="#C0201A" stroke-width="1.5"/>
+            <path d="M2 10h20" stroke="#C0201A" stroke-width="1.5"/>
+            <rect x="5" y="13" width="4" height="2" rx="1" fill="#C0201A"/>
+          </svg>
+        </div>
+        <span class="pay-badge-name">CARTÃO</span>
+        <span class="pay-badge-note">Até 3x sem juros</span>
+      </div>
+    </div>
+    <p style="font-size:13px;color:rgba(245,236,216,.4);margin-top:1.5rem">🔒 Ambiente 100% seguro · Confirmação por WhatsApp e e-mail</p>
+  </div>
+</div>
+
+<!-- INFO -->
+<div class="info-section" id="info">
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="section-tag">● O EVENTO</p>
+      <span class="section-heading-bold">UMA NOITE DE</span>
+      <span class="section-heading-script">música e amor</span>
+    </div>
+    <div class="info-grid reveal" style="transition-delay:.1s">
+      <div class="info-item">
+        <span class="info-item-icon">📅</span>
+        <div class="info-item-lbl">DATA</div>
+        <div class="info-item-val">12 de Junho de 2026</div>
+      </div>
+      <div class="info-item">
+        <span class="info-item-icon">🕗</span>
+        <div class="info-item-lbl">HORÁRIO</div>
+        <div class="info-item-val">20h00 às 03h00</div>
+      </div>
+      <div class="info-item">
+        <span class="info-item-icon">📍</span>
+        <div class="info-item-lbl">LOCAL</div>
+        <div class="info-item-val">Recife, Pernambuco</div>
+      </div>
+      <div class="info-item" style="border-right:none">
+        <span class="info-item-icon">🎤</span>
+        <div class="info-item-lbl">ATRAÇÃO</div>
+        <div class="info-item-val">A confirmar</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA STRIP -->
+<div class="cta-strip reveal">
+  <div class="cta-strip-title">NÃO PERCA ESSA OPORTUNIDADE</div>
+  <p class="cta-strip-sub">As mesas estão quase esgotadas. Ingressos do lote 2 com duração limitada.</p>
+  <a class="btn-main" href="#ingressos">COMPRAR AGORA →</a>
+</div>
+
+<!-- FAQ -->
+<div class="faq-section" id="faq">
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="section-tag">● DÚVIDAS FREQUENTES</p>
+      <span class="section-heading-bold">FICOU ALGUMA</span>
+      <span class="section-heading-script">dúvida?</span>
+    </div>
+    <div class="faq-list reveal" style="transition-delay:.1s">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Como funciona o sorteio da rifa?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">O sorteio é realizado ao vivo durante o evento, com transmissão em tempo real para todos os presentes. Cada número é único e gerado automaticamente no momento da compra. O ganhador é anunciado no palco.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Posso transferir meu ingresso para outra pessoa?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">Sim! Entre em contato via WhatsApp informando o número do pedido e os dados do novo titular. A transferência é gratuita e realizada em até 24 horas.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Quando recebo meu comprovante?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">Após a confirmação do pagamento — instantânea no caso do Pix — você recebe o comprovante por WhatsApp e e-mail em menos de 5 minutos.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          A Mesa VIP inclui consumação?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">A mesa VIP garante 6 lugares reservados durante todo o evento e 1 rifa bônus por assento (total de 6 rifas). A consumação não está incluída, mas você terá prioridade no atendimento.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          E se o evento for cancelado?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">Em caso de cancelamento, todos os compradores serão notificados e reembolsados integralmente no mesmo método de pagamento utilizado, em até 7 dias úteis.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-title">FORRÓ DOS NAMORADOS</div>
+  <div class="footer-script">2026</div>
+  <p>12 de Junho · Recife, PE</p>
+  <p style="margin-top:8px">Dúvidas? <a href="#">Fale conosco no WhatsApp</a></p>
+  <p style="margin-top:1.5rem;font-size:11px">© 2026 Forró dos Namorados · Todos os direitos reservados</p>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal-box">
+    <button class="modal-close" onclick="fecharModal()">×</button>
+    <div class="modal-tag">COMPRAR AGORA</div>
+    <div class="modal-product-name" id="modal-nome"></div>
+    <div class="modal-price" id="modal-preco"></div>
+    <input class="modal-input" placeholder="Nome completo" />
+    <input class="modal-input" placeholder="WhatsApp — (81) 99999-9999" />
+    <input class="modal-input" placeholder="E-mail" />
+    <p style="font-size:12px;color:#7A4530;margin-bottom:8px;font-weight:500">Forma de pagamento</p>
+    <div class="pay-row">
+      <button class="pay-opt selected" id="opt-pix" onclick="selPay('pix')">PIX</button>
+      <button class="pay-opt" id="opt-cc" onclick="selPay('cc')">CARTÃO</button>
+    </div>
+    <button class="modal-submit">CONFIRMAR PEDIDO →</button>
+    <p class="modal-secure">🔒 Ambiente seguro · Confirmação imediata por WhatsApp</p>
+  </div>
+</div>
+
+<script>
+// countdown
+const eventDate = new Date('2026-06-12T20:00:00');
+function tick() {
+  const diff = eventDate - new Date();
+  if (diff <= 0) return;
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  document.getElementById('cd-d').textContent = String(d).padStart(2,'0');
+  document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+  document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+}
+tick(); setInterval(tick, 1000);
+
+// faq
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const open = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!open) item.classList.add('open');
+}
+
+// modal
+function abrirModal(nome, preco) {
+  document.getElementById('modal-nome').textContent = nome;
+  document.getElementById('modal-preco').textContent = preco;
+  document.getElementById('modal-overlay').classList.add('active');
+}
+function fecharModal() {
+  document.getElementById('modal-overlay').classList.remove('active');
+}
+document.getElementById('modal-overlay').addEventListener('click', function(e) {
+  if (e.target === this) fecharModal();
+});
+function selPay(m) {
+  document.getElementById('opt-pix').className = 'pay-opt' + (m==='pix' ? ' selected' : '');
+  document.getElementById('opt-cc').className  = 'pay-opt' + (m==='cc'  ? ' selected' : '');
+}
+
+// scroll reveal
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }});
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(r => io.observe(r));
+</script>
+</body>
+</html>
