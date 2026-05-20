@@ -263,6 +263,12 @@ nav {
   font-family: 'Archivo Black', sans-serif;
   font-size: 28px; color: rgba(245,208,32,.3); line-height: 1; margin-top: -6px;
 }
+@media (max-width: 480px) {
+  .countdown { gap: 1rem; padding: 1rem; }
+  .cd-num { font-size: 28px; }
+  .cd-sep { font-size: 20px; }
+  .cd-units { gap: 0.75rem; }
+}
 
 /* ── SECTION ── */
 .section { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
